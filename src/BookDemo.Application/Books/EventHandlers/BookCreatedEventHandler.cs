@@ -1,9 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using BookDemo.Domain.Events;
 using MediatR;
 
-namespace BookDemo.Application.Books.Events;
+namespace BookDemo.Application.Books.EventHandlers;
 
 public class BookCreatedEventHandler : INotificationHandler<BookCreatedEvent>
 {

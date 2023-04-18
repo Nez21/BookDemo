@@ -2,7 +2,7 @@ using BookDemo.Domain.Common;
 using BookDemo.Domain.Common.Models;
 using BookDemo.Domain.Entities;
 
-namespace BookDemo.Application.Books.Events;
+namespace BookDemo.Domain.Events;
 
 public class BookCreatedEvent : BaseEvent
 {
