@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>net6.0</TargetFramework>
+      <ImplicitUsings>disable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+   </PropertyGroup>
+
+   <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection"
+         Version="12.0.1" />
+      <PackageReference Include="FluentValidation" Version="11.5.2" />
+      <PackageReference Include="HotChocolate.Types" Version="13.0.5" />
+      <PackageReference Include="MediatR" Version="12.0.1" />
+      <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="4.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+         Version="7.0.0" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <ProjectReference Include="..\BookDemo.Domain\BookDemo.Domain.csproj" />
+   </ItemGroup>
+
+</Project>

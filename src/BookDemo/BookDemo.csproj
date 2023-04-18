@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+   <PropertyGroup>
+      <TargetFramework>net6.0</TargetFramework>
+      <Nullable>enable</Nullable>
+      <ImplicitUsings>disable</ImplicitUsings>
+   </PropertyGroup>
+
+   <ItemGroup>
+      <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
+   </ItemGroup>
+
+
+   <ItemGroup>
+      <ProjectReference Include="..\BookDemo.Domain\BookDemo.Domain.csproj" />
+      <ProjectReference Include="..\BookDemo.Application\BookDemo.Application.csproj" />
+      <ProjectReference Include="..\BookDemo.Adapter\BookDemo.Adapter.csproj" />
+      <ProjectReference Include="..\BookDemo.Infrastructure\BookDemo.Infrastructure.csproj" />
+   </ItemGroup>
+
+</Project>
