@@ -18,6 +18,7 @@ public static class DependencyInjection
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             .AddInterceptors(provider.GetRequiredService<AddTimestampInterceptor>()));
       services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+      services.AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory>();
       services.AddLogging();
 
       return services;

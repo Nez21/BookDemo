@@ -35,7 +35,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
       optionsBuilder
          .UseSqlite("Data Source=Database.db")
-         .UseSnakeCaseNamingConvention(); ;
+         .UseSnakeCaseNamingConvention();
    }
 
    protected override void OnModelCreating(ModelBuilder modelBuilder)
