@@ -4,18 +4,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using BookDemo.Domain.Common.Interfaces;
 using BookDemo.Infrastructure.Database;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 public class UnitOfWork : IUnitOfWork
 {
    private readonly ApplicationDbContext _context;
+   private readonly IMediator _mediator;
    private IDbContextTransaction? _transaction;
    private bool _disposed;
 
-   public UnitOfWork(ApplicationDbContext context, IsolationLevel isolationLevel)
+   public UnitOfWork(ApplicationDbContext context, IMediator mediator, IsolationLevel isolationLevel)
    {
       _context = context;
+      _mediator = mediator;
       _context.Database.AutoTransactionBehavior = AutoTransactionBehavior.Never;
       _transaction = _context.Database.BeginTransaction(isolationLevel);
    }
@@ -30,6 +33,7 @@ public class UnitOfWork : IUnitOfWork
       try
       {
          var result = await _context.SaveChangesAsync(cancellationToken);
+         await _mediator.DispatchDomainEventsAsync(_context);
          await _transaction.CommitAsync(cancellationToken);
 
          return result;

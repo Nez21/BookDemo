@@ -21,7 +21,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
    {
-      await _mediator.DispatchDomainEventsAsync(this);
+      if (this.Database.CurrentTransaction == null)
+         await _mediator.DispatchDomainEventsAsync(this);
 
       return await base.SaveChangesAsync(cancellationToken);
    }
