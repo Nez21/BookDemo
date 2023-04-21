@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using BookDemo.Domain.Repositories;
 using AutoMapper;
-using BookDemo.Application.Books.Events;
 using BookDemo.Application.Common.Exceptions;
+using BookDemo.Domain.Events;
 
 namespace BookDemo.Application.Books.Commands.CreateBook;
 

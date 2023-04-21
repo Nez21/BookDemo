@@ -11,10 +11,12 @@ public static class DependencyInjection
 {
    public static IServiceCollection AddApplication(this IServiceCollection services)
    {
-      services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+      var assembly = Assembly.GetExecutingAssembly();
+
+      services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
       services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-      services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-      services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+      services.AddAutoMapper(assembly);
+      services.AddValidatorsFromAssembly(assembly);
 
       return services;
    }
