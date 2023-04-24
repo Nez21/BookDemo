@@ -1,9 +1,10 @@
+using BookDemo.Adapter.Common.Behaviors;
 using BookDemo.Adapter.GraphQL.Mutations;
 using BookDemo.Adapter.GraphQL.Queries;
 using BookDemo.Adapter.Repositories;
+using BookDemo.Domain.Common.Interfaces;
 using BookDemo.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace BookDemo.Adapter;
 
@@ -26,6 +27,7 @@ public static class DependencyInjection
 
       services.AddScoped<IBookRepository, BookRepository>();
       services.AddScoped<IAuthorRepository, AuthorRepository>();
+      services.AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory>();
 
       return services;
    }

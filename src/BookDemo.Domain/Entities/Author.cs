@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using BookDemo.Domain.Common;
 using BookDemo.Domain.Common.Models;
 
 namespace BookDemo.Domain.Entities;

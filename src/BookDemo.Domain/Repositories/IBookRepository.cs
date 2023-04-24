@@ -4,11 +4,6 @@ using BookDemo.Domain.Entities;
 
 namespace BookDemo.Domain.Repositories;
 
-public interface IAuthorRepository : IRepository
+public interface IBookRepository : IRepository<Book>
 {
-   IQueryable<Author> GetAllAuthors();
-   void AddAuthor(Author author);
-   void UpdateAuthor(Author author);
-   Author? DeleteAuthor(int authorId);
-   void Count();
 }

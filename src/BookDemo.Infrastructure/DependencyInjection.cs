@@ -1,8 +1,5 @@
-using BookDemo.Application.Common.Interfaces;
-using BookDemo.Domain.Common.Interfaces;
 using BookDemo.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookDemo.Infrastructure;
@@ -17,8 +14,7 @@ public static class DependencyInjection
          options
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             .AddInterceptors(provider.GetRequiredService<AddTimestampInterceptor>()));
-      services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-      services.AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory>();
+      services.AddScoped<DbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
       services.AddLogging();
 
       return services;

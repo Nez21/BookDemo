@@ -1,9 +1,9 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using BookDemo.Application.Books.Commands.CreateBook;
-using BookDemo.Application.Books.Commands.DeleteBook;
-using BookDemo.Application.Books.Commands.UpdateBook;
+using BookDemo.Application.Features.Books.Commands.CreateBook;
+using BookDemo.Application.Features.Books.Commands.DeleteBook;
+using BookDemo.Application.Features.Books.Commands.UpdateBook;
 using BookDemo.Domain.Entities;
 using HotChocolate;
 using HotChocolate.Types;

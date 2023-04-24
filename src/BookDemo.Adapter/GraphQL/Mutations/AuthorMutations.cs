@@ -1,9 +1,9 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using BookDemo.Application.Authors.Commands.CreateAuthor;
-using BookDemo.Application.Authors.Commands.DeleteAuthor;
-using BookDemo.Application.Authors.Commands.UpdateAuthor;
+using BookDemo.Application.Features.Authors.Commands.CreateAuthor;
+using BookDemo.Application.Features.Authors.Commands.DeleteAuthor;
+using BookDemo.Application.Features.Authors.Commands.UpdateAuthor;
 using BookDemo.Domain.Entities;
 using HotChocolate;
 using HotChocolate.Types;

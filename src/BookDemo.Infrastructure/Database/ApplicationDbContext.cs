@@ -1,6 +1,5 @@
 using BookDemo.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using BookDemo.Application.Common.Interfaces;
 using System.Threading.Tasks;
 using System.Threading;
 using MediatR;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BookDemo.Infrastructure.Database;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : DbContext
 {
    private readonly IConfiguration _configuration;
    private readonly IMediator _mediator;
@@ -22,13 +21,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
    {
       if (this.Database.CurrentTransaction == null)
-         await _mediator.DispatchDomainEventsAsync(this);
+         await this.DispatchDomainEventsAsync(_mediator);
 
       return await base.SaveChangesAsync(cancellationToken);
    }
-
-   public DbSet<Book> Books => Set<Book>();
-   public DbSet<Author> Authors => Set<Author>();
 
    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
    {
@@ -56,6 +52,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                .WithMany(a => a.Books)
                .HasForeignKey(e => e.AuthorId)
                .OnDelete(DeleteBehavior.Cascade);
+           entity.ToTable("books");
         });
 
       modelBuilder.Entity<Author>(entity =>
@@ -68,6 +65,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
          entity.Property(e => e.UpdatedAt).IsRequired();
          entity.HasMany<Book>(e => e.Books)
              .WithOne(b => b.Author);
+         entity.ToTable("authors");
       });
    }
 }

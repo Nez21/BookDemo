@@ -2,13 +2,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BookDemo.Domain.Entities;
-using BookDemo.Application.Books.Queries.ListBooks;
+using BookDemo.Application.Features.Books.Queries.ListBooks;
 using HotChocolate;
 using MediatR;
-using BookDemo.Application.Books.Queries.FindBook;
+using BookDemo.Application.Features.Books.Queries.FindBook;
 using HotChocolate.Types;
 using HotChocolate.Data;
-using BookDemo.Domain.Repositories;
 
 namespace BookDemo.Adapter.GraphQL.Queries;
 

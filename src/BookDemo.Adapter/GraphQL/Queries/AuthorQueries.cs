@@ -2,10 +2,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BookDemo.Domain.Entities;
-using BookDemo.Application.Authors.Queries.ListAuthors;
+using BookDemo.Application.Features.Authors.Queries.ListAuthors;
 using HotChocolate;
 using MediatR;
-using BookDemo.Application.Authors.Queries.FindAuthor;
+using BookDemo.Application.Features.Authors.Queries.FindAuthor;
 using HotChocolate.Types;
 using HotChocolate.Data;
 

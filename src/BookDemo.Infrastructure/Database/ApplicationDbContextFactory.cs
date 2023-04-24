@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace BookDemo.Infrastructure.Database;
 
-
 public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
 {
    public ApplicationDbContext CreateDbContext(string[] args)
