@@ -3,35 +3,33 @@ using BookDemo.Domain.Entities;
 using System.Threading.Tasks;
 using System.Threading;
 using BookDemo.Domain.Repositories;
-using AutoMapper;
 using BookDemo.Application.Common.Exceptions;
 using System.Linq;
 
-namespace BookDemo.Application.Features.Books.Commands.DeleteBook;
-
-public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Book>
+namespace BookDemo.Application.Features.Books.Commands.DeleteBook
 {
-   private readonly IBookRepository _bookRepository;
-   private readonly IMapper _mapper;
-
-   public DeleteBookCommandHandler(IBookRepository bookRepository, IMapper mapper)
+   public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Book>
    {
-      _bookRepository = bookRepository;
-      _mapper = mapper;
-   }
+      private readonly IBookRepository _bookRepository;
 
-   public async Task<Book> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
-   {
-      var book = _bookRepository.GetAll().FirstOrDefault(a => a.Id == request.Id);
-
-      if (book == null)
+      public DeleteBookCommandHandler(IBookRepository bookRepository)
       {
-         throw new NotFoundException("Book", request.Id);
+         _bookRepository = bookRepository;
       }
 
-      _bookRepository.Delete(book);
-      await _bookRepository.SaveAsync(cancellationToken);
+      public async Task<Book> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+      {
+         var book = _bookRepository.GetAll().FirstOrDefault(a => a.Id == request.Id);
 
-      return book;
+         if (book == null)
+         {
+            throw new NotFoundException("Book", request.Id);
+         }
+
+         _bookRepository.Delete(book);
+         await _bookRepository.SaveAsync(cancellationToken);
+
+         return book;
+      }
    }
 }

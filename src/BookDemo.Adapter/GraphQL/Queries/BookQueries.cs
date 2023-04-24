@@ -9,29 +9,29 @@ using BookDemo.Application.Features.Books.Queries.FindBook;
 using HotChocolate.Types;
 using HotChocolate.Data;
 
-namespace BookDemo.Adapter.GraphQL.Queries;
-
-
-[ExtendObjectType(OperationTypeNames.Query)]
-public class BookQueries
+namespace BookDemo.Adapter.GraphQL.Queries
 {
-   [UseOffsetPaging(IncludeTotalCount = true)]
-   [UseProjection]
-   [UseFiltering]
-   [UseSorting]
-   public async Task<IQueryable<Book>> ListBooks(
-     [Service] IMediator mediator,
-     CancellationToken cancellationToken)
+   [ExtendObjectType(OperationTypeNames.Query)]
+   public class BookQueries
    {
-      return await mediator.Send(new ListBooksQuery(), cancellationToken);
-   }
+      [UseOffsetPaging(IncludeTotalCount = true)]
+      [UseProjection]
+      [UseFiltering]
+      [UseSorting]
+      public async Task<IQueryable<Book>> ListBooks(
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+      {
+         return await mediator.Send(new ListBooksQuery(), cancellationToken);
+      }
 
-   [UseFirstOrDefault]
-   [UseProjection]
-   [UseFiltering]
-   [UseSorting]
-   public async Task<IQueryable<Book>> FindBook(FindBookQuery input, [Service] IMediator mediator, CancellationToken cancellationToken)
-   {
-      return await mediator.Send(input, cancellationToken);
+      [UseFirstOrDefault]
+      [UseProjection]
+      [UseFiltering]
+      [UseSorting]
+      public async Task<IQueryable<Book>> FindBook(FindBookQuery input, [Service] IMediator mediator, CancellationToken cancellationToken)
+      {
+         return await mediator.Send(input, cancellationToken);
+      }
    }
 }

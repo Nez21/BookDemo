@@ -1,23 +1,26 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BookDemo.Domain.Entities;
 using BookDemo.Domain.Repositories;
+
 using MediatR;
 
-namespace BookDemo.Application.Features.Books.Queries.ListBooks;
-
-public class ListBooksQueryHandler : IRequestHandler<ListBooksQuery, IQueryable<Book>>
+namespace BookDemo.Application.Features.Books.Queries.ListBooks
 {
-   private readonly IBookRepository _bookRepository;
-
-   public ListBooksQueryHandler(IBookRepository bookRepository)
+   public class ListBooksQueryHandler : IRequestHandler<ListBooksQuery, IQueryable<Book>>
    {
-      _bookRepository = bookRepository;
-   }
+      private readonly IBookRepository _bookRepository;
 
-   public Task<IQueryable<Book>> Handle(ListBooksQuery request, CancellationToken cancellationToken)
-   {
-      return Task.FromResult(_bookRepository.GetAll());
+      public ListBooksQueryHandler(IBookRepository bookRepository)
+      {
+         _bookRepository = bookRepository;
+      }
+
+      public Task<IQueryable<Book>> Handle(ListBooksQuery request, CancellationToken cancellationToken)
+      {
+         return Task.FromResult(_bookRepository.GetAll());
+      }
    }
 }

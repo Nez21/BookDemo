@@ -1,22 +1,23 @@
 using System;
 
-namespace BookDemo.Application.Common.Exceptions;
-
-public class NotFoundException : Exception
+namespace BookDemo.Application.Common.Exceptions
 {
-   public NotFoundException() : base()
+   public class NotFoundException : Exception
    {
-   }
+      public NotFoundException()
+      {
+      }
 
-   public NotFoundException(string message) : base(message)
-   {
-   }
+      public NotFoundException(string message) : base(message)
+      {
+      }
 
-   public NotFoundException(string message, Exception innerException) : base(message, innerException)
-   {
-   }
+      public NotFoundException(string message, Exception innerException) : base(message, innerException)
+      {
+      }
 
-   public NotFoundException(string name, object key) : base($"{name} #{key} was not found.")
-   {
+      public NotFoundException(string name, object key) : base($"{name} #{key} was not found.")
+      {
+      }
    }
 }

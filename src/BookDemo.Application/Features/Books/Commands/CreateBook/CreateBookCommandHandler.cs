@@ -8,37 +8,37 @@ using AutoMapper;
 using BookDemo.Application.Common.Exceptions;
 using BookDemo.Domain.Events;
 
-namespace BookDemo.Application.Features.Books.Commands.CreateBook;
-
-public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Book>
+namespace BookDemo.Application.Features.Books.Commands.CreateBook
 {
-   private readonly IBookRepository _bookRepository;
-   private readonly IAuthorRepository _authorRepository;
-   private readonly IMapper _mapper;
-
-   public CreateBookCommandHandler(IBookRepository bookRepository, IAuthorRepository authorRepository, IMapper mapper)
+   public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Book>
    {
-      _bookRepository = bookRepository;
-      _authorRepository = authorRepository;
-      _mapper = mapper;
-   }
+      private readonly IBookRepository _bookRepository;
+      private readonly IAuthorRepository _authorRepository;
+      private readonly IMapper _mapper;
 
-   public async Task<Book> Handle(CreateBookCommand request, CancellationToken cancellationToken)
-   {
-      var hasAuthor = _authorRepository.GetAll().FirstOrDefault(a => a.Id == request.AuthorId) != null;
-
-      if (!hasAuthor)
+      public CreateBookCommandHandler(IBookRepository bookRepository, IAuthorRepository authorRepository, IMapper mapper)
       {
-         throw new NotFoundException("Author", request.AuthorId);
+         _bookRepository = bookRepository;
+         _authorRepository = authorRepository;
+         _mapper = mapper;
       }
 
-      var book = _mapper.Map<Book>(request);
+      public async Task<Book> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+      {
+         var hasAuthor = _authorRepository.GetAll().FirstOrDefault(a => a.Id == request.AuthorId) != null;
 
-      book.DomainEvents.Add(new BookCreatedEvent { Book = book });
-      _bookRepository.Add(book);
-      await _bookRepository.SaveAsync(cancellationToken);
+         if (!hasAuthor)
+         {
+            throw new NotFoundException("Author", request.AuthorId);
+         }
 
+         var book = _mapper.Map<Book>(request);
 
-      return book;
+         book.DomainEvents.Add(new BookCreatedEvent { Book = book });
+         _bookRepository.Add(book);
+         await _bookRepository.SaveAsync(cancellationToken);
+
+         return book;
+      }
    }
 }

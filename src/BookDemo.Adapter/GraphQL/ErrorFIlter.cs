@@ -1,41 +1,47 @@
 using System;
-using System.Collections.Generic;
+
 using BookDemo.Application.Common.Exceptions;
+
 using HotChocolate;
+
 using Microsoft.Extensions.Logging;
+
 using Newtonsoft.Json;
+
 using ValidationException = BookDemo.Application.Common.Exceptions.ValidationException;
 
-public class ErrorFilter : IErrorFilter
+namespace BookDemo.Adapter.GraphQL
 {
-   private readonly ILogger _logger;
-
-   public ErrorFilter(ILogger<ErrorFilter> logger)
+   public class ErrorFilter : IErrorFilter
    {
-      _logger = logger;
-   }
+      private readonly ILogger _logger;
 
-   public IError OnError(IError error)
-   {
-      if (error.Exception is ValidationException validationException)
+      public ErrorFilter(ILogger<ErrorFilter> logger)
       {
-         return error.WithMessage(validationException.Message)
-            .WithCode("VALIDATION_ERROR")
-            .SetExtension("errors", JsonConvert.SerializeObject(validationException.Errors));
+         _logger = logger;
       }
 
-
-      if (error.Exception is NotFoundException notFoundException)
+      public IError OnError(IError error)
       {
-         return error.WithMessage(notFoundException.Message)
-            .WithCode("NOT_FOUND");
-      }
+         if (error.Exception is ValidationException validationException)
+         {
+            return error.WithMessage(validationException.Message)
+               .WithCode("VALIDATION_ERROR")
+               .SetExtension("errors", JsonConvert.SerializeObject(validationException.Errors));
+         }
 
-      if (error.Exception is Exception exception)
-      {
-         _logger.LogError(exception, exception.Message);
-      }
+         if (error.Exception is NotFoundException notFoundException)
+         {
+            return error.WithMessage(notFoundException.Message)
+               .WithCode("NOT_FOUND");
+         }
 
-      return error;
+         if (error.Exception is Exception exception)
+         {
+            _logger.LogError(exception, exception.Message);
+         }
+
+         return error;
+      }
    }
 }

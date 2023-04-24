@@ -1,22 +1,24 @@
 using BookDemo.Infrastructure.Database;
+using BookDemo.Infrastructure.Database.Interceptors;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BookDemo.Infrastructure;
-
-public static class DependencyInjection
+namespace BookDemo.Infrastructure
 {
-
-   public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+   public static class DependencyInjection
    {
-      services.AddScoped<AddTimestampInterceptor>();
-      services.AddDbContext<ApplicationDbContext>((provider, options) =>
-         options
-            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-            .AddInterceptors(provider.GetRequiredService<AddTimestampInterceptor>()));
-      services.AddScoped<DbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-      services.AddLogging();
+      public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+      {
+         services.AddScoped<AddTimestampInterceptor>();
+         services.AddDbContext<ApplicationDbContext>((provider, options) =>
+            options
+               .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+               .AddInterceptors(provider.GetRequiredService<AddTimestampInterceptor>()));
+         services.AddScoped<DbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+         services.AddLogging();
 
-      return services;
+         return services;
+      }
    }
 }

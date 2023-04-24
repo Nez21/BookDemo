@@ -1,8 +1,9 @@
 using System.Data;
 
-namespace BookDemo.Domain.Common.Interfaces;
-
-public interface IUnitOfWorkFactory
+namespace BookDemo.Domain.Common.Interfaces
 {
-   IUnitOfWork Create(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+   public interface IUnitOfWorkFactory
+   {
+      IUnitOfWork Create(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+   }
 }

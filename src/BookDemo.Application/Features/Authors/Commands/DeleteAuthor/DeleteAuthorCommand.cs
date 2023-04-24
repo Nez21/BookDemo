@@ -2,18 +2,18 @@ using MediatR;
 using BookDemo.Domain.Entities;
 using FluentValidation;
 
-namespace BookDemo.Application.Features.Authors.Commands.DeleteAuthor;
-
-public class DeleteAuthorCommand : IRequest<Author>
+namespace BookDemo.Application.Features.Authors.Commands.DeleteAuthor
 {
-   public int Id { get; set; }
-
-}
-
-public class DeleteAuthorCommandValidator : AbstractValidator<DeleteAuthorCommand>
-{
-   public DeleteAuthorCommandValidator()
+   public class DeleteAuthorCommand : IRequest<Author>
    {
-      RuleFor(v => v.Id).Must(v => v >= 0).WithMessage("Id must be non-negative number");
+      public int Id { get; set; }
+   }
+
+   public class DeleteAuthorCommandValidator : AbstractValidator<DeleteAuthorCommand>
+   {
+      public DeleteAuthorCommandValidator()
+      {
+         RuleFor(v => v.Id).Must(v => v >= 0).WithMessage("Id must be non-negative number");
+      }
    }
 }

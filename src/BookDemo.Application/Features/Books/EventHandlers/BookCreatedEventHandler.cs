@@ -1,17 +1,20 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BookDemo.Domain.Events;
+
 using MediatR;
 
-namespace BookDemo.Application.Books.EventHandlers;
-
-public class BookCreatedEventHandler : INotificationHandler<BookCreatedEvent>
+namespace BookDemo.Application.Features.Books.EventHandlers
 {
-   public Task Handle(BookCreatedEvent notification, CancellationToken cancellationToken)
+   public class BookCreatedEventHandler : INotificationHandler<BookCreatedEvent>
    {
-      Console.WriteLine($"Book \"{notification.Book.Title}\" created!");
+      public Task Handle(BookCreatedEvent notification, CancellationToken cancellationToken)
+      {
+         Console.WriteLine($"Book \"{notification.Book.Title}\" created!");
 
-      return Task.CompletedTask;
+         return Task.CompletedTask;
+      }
    }
 }
