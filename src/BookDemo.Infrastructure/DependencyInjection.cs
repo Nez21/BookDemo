@@ -1,5 +1,5 @@
-using BookDemo.Infrastructure.Database;
-using BookDemo.Infrastructure.Database.Interceptors;
+using BookDemo.Infrastructure.Persistence;
+using BookDemo.Infrastructure.Persistence.Interceptors;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

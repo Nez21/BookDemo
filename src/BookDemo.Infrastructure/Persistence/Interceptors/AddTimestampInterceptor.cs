@@ -8,7 +8,7 @@ using BookDemo.Domain.Common.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace BookDemo.Infrastructure.Database.Interceptors
+namespace BookDemo.Infrastructure.Persistence.Interceptors
 {
    public class AddTimestampInterceptor : SaveChangesInterceptor
    {

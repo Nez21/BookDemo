@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using BookDemo.Adapter.Common.Extensions;
 
-namespace BookDemo.Infrastructure.Database
+namespace BookDemo.Infrastructure.Persistence
 {
    public class ApplicationDbContext : DbContext
    {
