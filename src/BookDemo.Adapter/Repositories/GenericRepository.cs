@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using BookDemo.Domain.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-public abstract class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
+public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
 {
    private readonly DbContext _context;
    private readonly DbSet<TEntity> _dbSet;

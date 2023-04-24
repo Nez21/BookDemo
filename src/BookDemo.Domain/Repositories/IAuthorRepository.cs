@@ -4,6 +4,6 @@ using BookDemo.Domain.Entities;
 
 namespace BookDemo.Domain.Repositories;
 
-public interface IAuthorRepository : IRepository<Author>
+public interface IAuthorRepository : IGenericRepository<Author>
 {
 }
